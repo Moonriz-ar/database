@@ -35,3 +35,37 @@ WHERE first_name LIKE 'Sam%';
 SELECT title
 FROM movies
 WHERE release_date BETWEEN '2004-01-01' AND '2008-12-31';
+
+-- CONSULTAS ALIAS, LIMIT y OFFSET
+-- 1 mostrar titulo de todas las series y usar alias para que el nombre del campo este en espaniol
+SELECT title AS titulo
+FROM series;
+-- 2 mostrar titulo de las peliculas con rating mayor a 3, con mas de 1 premio y con fecha lanzamiento entre anio '1988-01-01' al '2009-12-31'. Ordenar resultador por rating descendentemente.
+SELECT title
+FROM movies
+WHERE 
+	rating > 3 
+    AND awards > 1 
+    AND release_date BETWEEN '1988-01-01' AND '2009-12-31'
+ORDER BY rating DESC;
+-- 3 traer el top 3 a partir del registro 10 de la consulta anterior
+SELECT title
+FROM movies
+WHERE 
+	rating > 3 
+    AND awards > 1 
+    AND release_date BETWEEN '1988-01-01' AND '2009-12-31'
+ORDER BY rating DESC
+LIMIT 3
+OFFSET 10;
+-- 4 cuales son los 3 peores episodios teniendo en cuenta su rating?
+SELECT title, rating
+FROM episodes
+ORDER BY rating
+LIMIT 3;
+-- obtener el listado de todos los actores. Quitar las columnas de fechas y pelicula favorita, ademas traducir los nombres de las columnas
+SELECT 
+	first_name AS nombre,
+    last_name AS apellido,
+    rating
+FROM actors;
